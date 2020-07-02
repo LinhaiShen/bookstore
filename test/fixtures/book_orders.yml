@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  refnumber: MyString
+  status: 1
+  deliverytime: 2020-07-01 10:33:44
+  deliveryaddress: MyString
+  notes: MyText
+
+two:
+  refnumber: MyString
+  status: 1
+  deliverytime: 2020-07-01 10:33:44
+  deliveryaddress: MyString
+  notes: MyText

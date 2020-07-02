@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  linenumber: 1
+  status: 1
+  book: one
+  qty: 1
+
+two:
+  linenumber: 1
+  status: 1
+  book: two
+  qty: 1
