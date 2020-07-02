@@ -2,6 +2,15 @@ Trestle.resource(:book_orders) do
   menu do
     item :book_orders, icon: "fa fa-star"
   end
+
+  search do |query|
+    if query
+      BookOrder.where("id LIKE ?", "%#{query}%")
+    else
+      BookOrder.all
+    end
+  end
+
   form do
     tab :book_order do
       text_field :id
