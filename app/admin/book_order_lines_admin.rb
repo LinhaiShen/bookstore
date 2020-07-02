@@ -16,7 +16,7 @@ Trestle.resource(:book_order_lines) do
   end
 
   table do
-    column :book_order_id
+    column :book_order
     column :linenumber
     column :book
     column :qty

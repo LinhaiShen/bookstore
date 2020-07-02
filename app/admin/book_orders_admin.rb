@@ -2,6 +2,25 @@ Trestle.resource(:book_orders) do
   menu do
     item :book_orders, icon: "fa fa-star"
   end
+  form do
+    tab :book_order do
+      text_field :id
+      text_field :refnumber
+      text_field :status
+      text_field :deliveryaddress
+    end
+    tab :notes do
+      text_field :notes
+    end
+    tab :lines, badge: BookOrderLine.where(book_order: instance.id).size do
+      table BookOrderLine.where(book_order: instance.id) do
+        column :linenumber
+        column :book
+        column :qty
+      end
+    end
+  end
+
 
   # Customize the table columns shown on the index view.
   #
