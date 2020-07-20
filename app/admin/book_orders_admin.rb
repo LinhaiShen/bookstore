@@ -1,6 +1,6 @@
 Trestle.resource(:book_orders) do
   menu do
-    item :book_orders, icon: "fa fa-star"
+    item :book_orders, icon: "fa fa-file-alt"
   end
 
   search do |query|
@@ -23,6 +23,7 @@ Trestle.resource(:book_orders) do
     end
     tab :lines, badge: BookOrderLine.where(book_order: instance.id).size do
       table BookOrderLine.where(book_order: instance.id) do
+        column :itself
         column :linenumber
         column :book
         column :qty
