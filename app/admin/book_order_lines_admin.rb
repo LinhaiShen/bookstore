@@ -4,7 +4,7 @@ Trestle.resource(:book_order_lines) do
   end
 
   form do
-    text_field :book_order_id
+    select :book_order_id, BookOrder.all
     text_field :linenumber
     select :book_id, Book.all
     text_field :qty

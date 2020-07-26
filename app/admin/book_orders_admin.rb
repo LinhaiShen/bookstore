@@ -5,7 +5,7 @@ Trestle.resource(:book_orders) do
 
   search do |query|
     if query
-      BookOrder.where("id LIKE ?", "%#{query}%")
+      BookOrder.where("id LIKE ? OR refnumber LIKE ?", "%#{query}%", "%#{query}%")
     else
       BookOrder.all
     end
@@ -13,14 +13,15 @@ Trestle.resource(:book_orders) do
 
   form do
     tab :book_order do
-      text_field :id
-      text_field :refnumber
-      text_field :status
+      row do
+        text_field :id,:readonly => true
+        text_field :refnumber
+        select :status, ["created","confirmed","cancelled"]
+      end
       text_field :deliveryaddress
-    end
-    tab :notes do
       text_field :notes
     end
+    
     tab :lines, badge: BookOrderLine.where(book_order: instance.id).size do
       table BookOrderLine.where(book_order: instance.id) do
         column :linenumber
