@@ -23,6 +23,7 @@ Trestle.configure do |config|
   # Defaults to 'Powered by Trestle'.
   #
   # config.footer = "Powered by Trestle"
+  config.footer = "Powered by Trestle & LinhaiShen"
 
   # Sets the default precision for timestamps (either :minutes or :seconds).
   # Defaults to :minutes.
@@ -34,6 +35,7 @@ Trestle.configure do |config|
   # Set the path at which to mount the Trestle admin. Defaults to /admin.
   #
   # config.path = "/admin"
+  config.path = "/"
 
   # Toggle whether Trestle should automatically mount the admin within your
   # Rails application's routes. Defaults to true.
