@@ -6,10 +6,11 @@ Trestle.resource(:dusers, model: Duser, scope: Auth) do
     end
   end
 
-  menu do
+  menu do unless not current_user.sysadmin?
     group :configuration, priority: :last do
       item :dusers, icon: "fa fa-users"
     end
+  end
   end
 
   table do

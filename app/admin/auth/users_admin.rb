@@ -1,8 +1,9 @@
 Trestle.resource(:users, model: User, scope: Auth) do
-  menu do
+  menu do unless not current_user.sysadmin?
     group :configuration, priority: :last do
       item :users, icon: "fa fa-users"
     end
+  end
   end
 
   table do

@@ -1,6 +1,8 @@
 Trestle.resource(:books) do
   menu do
+    group :Operations do
     item :books, icon: "fa fa-book"
+    end
   end
 
   # Customize the table columns shown on the index view.

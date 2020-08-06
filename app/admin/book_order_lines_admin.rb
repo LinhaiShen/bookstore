@@ -1,6 +1,8 @@
 Trestle.resource(:book_order_lines) do
   menu do
-    item :book_order_lines, icon: "fa fa-list"
+    group :Operations do
+      item :book_order_lines, icon: "fa fa-list"
+    end
   end
 
   form do

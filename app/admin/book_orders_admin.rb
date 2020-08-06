@@ -1,6 +1,8 @@
 Trestle.resource(:book_orders) do
   menu do
+    group :Operations do
     item :book_orders, icon: "fa fa-file-alt"
+    end
   end
 
   search do |query|
