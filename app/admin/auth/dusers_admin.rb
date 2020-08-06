@@ -1,4 +1,11 @@
 Trestle.resource(:dusers, model: Duser, scope: Auth) do
+  before_action do
+    unless current_user.sysadmin?
+      flash[:error] = "Administrator access required."
+      redirect_to Trestle.config.path
+    end
+  end
+
   menu do
     group :configuration, priority: :last do
       item :dusers, icon: "fa fa-users"
@@ -17,6 +24,7 @@ Trestle.resource(:dusers, model: Duser, scope: Auth) do
 
   form do |administrator|
     text_field :email
+    select :group, ["sysadmin","orderadmin","worker"]
 
     row do
       col(sm: 6) { password_field :password }

@@ -11,6 +11,12 @@ Trestle.resource(:book_orders) do
     end
   end
 
+  scopes do
+    scope :all
+    scope :open , default: true
+    scope :today
+  end
+
   form do
     tab :book_order do
       row do
