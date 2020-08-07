@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_06_021423) do
+ActiveRecord::Schema.define(version: 2020_08_07_093859) do
 
   create_table "book_order_lines", force: :cascade do |t|
     t.integer "linenumber"
@@ -54,6 +54,26 @@ ActiveRecord::Schema.define(version: 2020_08_06_021423) do
     t.integer "group"
     t.index ["email"], name: "index_dusers_on_email", unique: true
     t.index ["reset_password_token"], name: "index_dusers_on_reset_password_token", unique: true
+  end
+
+  create_table "locations", force: :cascade do |t|
+    t.integer "ops"
+    t.integer "type"
+    t.integer "container"
+    t.string "building"
+    t.string "room"
+    t.string "aisle"
+    t.string "face"
+    t.integer "column"
+    t.integer "layer"
+    t.integer "containercapa"
+    t.integer "weightcapa"
+    t.integer "heightcapa"
+    t.integer "volumecapa"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.string "code"
+    t.index ["code"], name: "index_locations_on_code", unique: true
   end
 
   create_table "users", force: :cascade do |t|
