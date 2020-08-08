@@ -4,7 +4,8 @@ class Location < ApplicationRecord
 
     before_save :default_values
     def default_values
-        location_code = self.aisle+self.face+("%03d" % self.column)+self.layer.to_s+'R'+self.room+'B'+self.building
+        #location_code = self.aisle+self.face+("%03d" % self.column)+self.layer.to_s+'R'+self.room+'B'+self.building
+        location_code = self.aisle+("%03d" % self.column)+self.layer.to_s+'R'+self.room+'B'+self.building
         #self.code = location_code
         if self.code.blank?
         #    if !Location.exists?(code: location_code)
