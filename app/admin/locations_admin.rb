@@ -5,6 +5,16 @@ Trestle.resource(:locations) do
     end
   end
 
+  table do
+    column :code
+    column :building
+    column :room
+    column :aisle
+    column :face
+    column :column
+    column :layer
+  end
+
   controller do
     def create
       location_code = instance.aisle+("%03d" % instance.column)+instance.layer.to_s+'R'+instance.room+'B'+instance.building
