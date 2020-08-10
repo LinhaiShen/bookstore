@@ -1,6 +1,7 @@
 class BookOrder < ApplicationRecord
     has_many :bookorderlines
     enum status: {created:0, confirmed:1, fulfilled:5, cancelled:9}
+    STATUSES = ["created","confirmed","fulfilled","cancelled"]
     scope :today, -> {where(created_at: Time.current.beginning_of_day..Time.current.end_of_day)}
     scope :open, -> {where(:status => ["created","confirmed"])}
     before_save :default_values

@@ -24,7 +24,7 @@ Trestle.resource(:book_orders) do
       row do
         text_field :id,:readonly => true
         text_field :refnumber
-        select :status, ["created","confirmed","cancelled"]
+        select :status, BookOrder::STATUSES
       end
       text_field :deliveryaddress
       text_field :notes

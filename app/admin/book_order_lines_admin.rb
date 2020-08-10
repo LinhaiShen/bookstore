@@ -22,7 +22,9 @@ Trestle.resource(:book_order_lines) do
     column :linenumber
     column :book
     column :qty
-    column :status
+    column :status do |book_order_line|
+      status_tag(book_order_line.status, { "fulfilled" => :success }[book_order_line.status] || :default)
+    end
     actions do |toolbar, instance, admin|
      toolbar.edit if admin && admin.actions.include?(:edit) if instance.status.in?(["created","cancelled"])
      toolbar.delete if admin && admin.actions.include?(:destroy) if instance.status.in?(["created","cancelled"])
