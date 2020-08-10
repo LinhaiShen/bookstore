@@ -13,6 +13,36 @@ Trestle.resource(:locations) do
     column :face
     column :column
     column :layer
+    actions
+  end
+
+  form do |location|
+    tab :Location do
+      static_field :code
+      divider
+      row do
+        col(sm: 1) { select :building, Location::BUILDINGS }
+        col(sm: 1) { select :room, Location::ROOMS }
+        col(sm: 1) { select :aisle, Location::AISLES }
+        col(sm: 1) { select :face, Location::FACES }
+        col(sm: 1) { text_field :column, required: true, value: 1 }
+        col(sm: 1) { select :layer, Location::LAYERS }
+      end
+      #text_field :building
+      #text_field :room
+      #text_field :aisle
+      #text_field :face
+      #text_field :column
+      #text_field :layer
+      divider
+
+      row do
+        col(sm: 2) { text_field :containercapa, append: "unit" }
+        col(sm: 2) { text_field :weightcapa, append: "KG" }
+        col(sm: 2) { text_field :heightcapa, append: "mm" }
+        col(sm: 2) { text_field :volumecapa, append: "L" }
+      end
+    end
   end
 
   controller do
@@ -21,13 +51,21 @@ Trestle.resource(:locations) do
       #flash[:message] = location_code
       #redirect_to LocationsAdmin.path
       if Location.exists?(code: location_code)
-        flash[:message] = "Location " + location_code + " already exists!"
-        redirect_to LocationsAdmin.path
+        flash.now[:error] = flash_message("location exists", title: "Warning!", message: location_code + I18n.t(:error_record_exists) )
+        render "new" , status: :unprocessable_entity
       else
-        @location = Location.new(params[:location])
-        @location.save
-        flash[:message] = "Location " + location_code + " created!"
-        redirect_to LocationsAdmin.path
+        if save_instance
+          respond_to do |format|
+            format.html do
+              flash[:message] = flash_message("create.success", title: "Success!", message: "The %{lowercase_model_name} was successfully created.")
+              redirect_to_return_location(:create, instance, default: admin.instance_path(instance))
+            end
+            format.json { render json: instance, status: :created, location: admin.instance_path(instance) }
+
+            yield format if block_given?
+          end
+        end
+
       end
     end
   end

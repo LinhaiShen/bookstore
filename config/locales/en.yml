@@ -31,3 +31,4 @@
 
 en:
   hello: "Hello world"
+  error_record_exists: " record already exists."
