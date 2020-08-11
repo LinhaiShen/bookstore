@@ -12,18 +12,6 @@
 
 ActiveRecord::Schema.define(version: 2020_08_11_061157) do
 
-  create_table "book_order_details", force: :cascade do |t|
-    t.integer "book_order_id", null: false
-    t.string "lineno"
-    t.integer "status"
-    t.integer "book_id", null: false
-    t.integer "qty"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["book_id"], name: "index_book_order_details_on_book_id"
-    t.index ["book_order_id"], name: "index_book_order_details_on_book_order_id"
-  end
-
   create_table "book_order_lines", force: :cascade do |t|
     t.integer "linenumber"
     t.integer "status"
@@ -93,16 +81,6 @@ ActiveRecord::Schema.define(version: 2020_08_11_061157) do
     t.index ["code"], name: "index_locations_on_code", unique: true
   end
 
-  create_table "order_details", force: :cascade do |t|
-    t.integer "book_order_id", null: false
-    t.string "lineno"
-    t.integer "status"
-    t.integer "qty"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["book_order_id"], name: "index_order_details_on_book_order_id"
-  end
-
   create_table "roles", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
@@ -120,9 +98,6 @@ ActiveRecord::Schema.define(version: 2020_08_11_061157) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  add_foreign_key "book_order_details", "book_orders"
-  add_foreign_key "book_order_details", "books"
   add_foreign_key "book_order_lines", "book_orders"
   add_foreign_key "book_order_lines", "books"
-  add_foreign_key "order_details", "book_orders"
 end
