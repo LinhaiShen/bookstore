@@ -10,7 +10,7 @@ Trestle.resource(:book_order_lines) do
     text_field :linenumber
     select :book_id, Book.all
     text_field :qty
-    select :status, ["created","cancelled"]
+    select :status, BookOrder::STATUSES
     row do
      col { datetime_field :updated_at }
      col { datetime_field :created_at }
@@ -23,7 +23,7 @@ Trestle.resource(:book_order_lines) do
     column :book
     column :qty
     column :status do |book_order_line|
-      status_tag(book_order_line.status, { "fulfilled" => :success }[book_order_line.status] || :default)
+      status_tag(book_order_line.status, { "fulfilled" => :info,"cancelled" => :danger }[book_order_line.status] || :default)
     end
     actions do |toolbar, instance, admin|
      toolbar.edit if admin && admin.actions.include?(:edit) if instance.status.in?(["created","cancelled"])
