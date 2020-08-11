@@ -46,6 +46,20 @@ Trestle.resource(:locations) do
   end
 
   controller do
+    def show
+      respond_to do |format|
+        format.html { render :show }
+        format.pdf do
+          pdf = Prawn::Document.new
+          pdf.table([ [pcode = instance.code], [pbuilding = instance.building] ])
+          send_data pdf.render,
+            filename: "export.pdf",
+            type: 'application/pdf',
+            disposition: 'inline'
+        end
+      end
+    end
+
     def create
       location_code = instance.aisle+("%03d" % instance.column)+instance.layer.to_s+'R'+instance.room+'B'+instance.building
       #flash[:message] = location_code
