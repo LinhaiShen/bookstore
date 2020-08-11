@@ -23,9 +23,10 @@ Trestle.resource(:dusers, model: Duser, scope: Auth) do
     end
   end
 
-  form do |administrator|
+  form do |duser|
     text_field :email
     select :group, ["sysadmin","orderadmin","worker"]
+    select :role_ids, Role.alphabetical.map { |c|[c.name, c.id] }, { label: "Role" }, multiple: true
 
     row do
       col(sm: 6) { password_field :password }

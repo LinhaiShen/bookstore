@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_07_093859) do
+ActiveRecord::Schema.define(version: 2020_08_11_061157) do
 
   create_table "book_order_details", force: :cascade do |t|
     t.integer "book_order_id", null: false
@@ -68,6 +68,11 @@ ActiveRecord::Schema.define(version: 2020_08_07_093859) do
     t.index ["reset_password_token"], name: "index_dusers_on_reset_password_token", unique: true
   end
 
+  create_table "dusers_roles", id: false, force: :cascade do |t|
+    t.integer "duser_id", null: false
+    t.integer "role_id", null: false
+  end
+
   create_table "locations", force: :cascade do |t|
     t.integer "ops"
     t.integer "type"
@@ -96,6 +101,12 @@ ActiveRecord::Schema.define(version: 2020_08_07_093859) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["book_order_id"], name: "index_order_details_on_book_order_id"
+  end
+
+  create_table "roles", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "users", force: :cascade do |t|
