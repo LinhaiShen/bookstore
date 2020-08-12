@@ -18,7 +18,12 @@ Trestle.resource(:locations) do
 
   form do |location|
     tab :Location do
-      static_field :code
+      row do
+        col(sm: 2) { static_field :code }
+        col(sm: 1) { text_field :ops }
+        col(sm: 1) { select :loctype,Location::LOCTYPES }
+        col(sm: 1) { text_field :container }
+      end
       divider
       row do
         col(sm: 1) { select :building, Location::BUILDINGS }
@@ -46,6 +51,14 @@ Trestle.resource(:locations) do
   end
 
   controller do
+    def index
+      @location_list = Location.all
+      respond_to do |format|
+        format.html { render :index }
+        format.csv { send_data @location_list.to_csv }
+      end
+    end
+
     def show
       respond_to do |format|
         format.html { render :show }
