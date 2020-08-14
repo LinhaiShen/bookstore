@@ -1,11 +1,15 @@
-Trestle.resource(:locations) do
+Trestle.resource(:locations, readonly: true) do
   menu do
     group :Facility do
     item :locations, icon: "fa fa-warehouse"
     end
   end
+  scopes do
+    scope :physical , default: true
+  end
 
   table do
+    column :type
     column :code
     column :building
     column :room

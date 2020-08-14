@@ -1,5 +1,6 @@
 class Location < ApplicationRecord
     self.primary_key = :code
+    scope :physical, -> {where(:type => nil)}
     enum ops: {storage:0, receiving:1, shipping:2, vas:3, suspend:9}
     enum loctype: {rack:0, ground:1}
     LOCTYPES = ["rack","ground"]

@@ -1,0 +1,2 @@
+class SystemLoc < Location
+end

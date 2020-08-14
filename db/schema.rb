@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_12_085210) do
+ActiveRecord::Schema.define(version: 2020_08_14_094517) do
 
   create_table "book_order_details", force: :cascade do |t|
     t.integer "book_order_id", null: false
@@ -90,6 +90,7 @@ ActiveRecord::Schema.define(version: 2020_08_12_085210) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "code"
+    t.string "type"
     t.index ["code"], name: "index_locations_on_code", unique: true
   end
 
