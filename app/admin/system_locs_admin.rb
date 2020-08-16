@@ -2,6 +2,19 @@ Trestle.resource(:system_locs) do
   menu do
     item :system_locs, icon: "fa fa-star"
   end
+  
+  table do
+    column :type
+    column :code
+    column :building
+    column :room
+    column :aisle
+    column :face
+    column :column
+    column :layer
+    actions
+  end
+
   form do |location|
     tab :Location do
       row do
