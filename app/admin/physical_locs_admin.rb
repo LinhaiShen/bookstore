@@ -1,11 +1,6 @@
-Trestle.resource(:locations, readonly: true) do
+Trestle.resource(:physical_locs) do
   menu do
-    group :Facility do
-    item :locations, icon: "fa fa-warehouse"
-    end
-  end
-  scopes do
-    scope :physical 
+    item :physical_locs, icon: "fa fa-star"
   end
 
   table do
@@ -55,52 +50,6 @@ Trestle.resource(:locations, readonly: true) do
     end
   end
 
-  controller do
-    def index
-      @location_list = Location.all
-      respond_to do |format|
-        format.html { render :index }
-        format.csv { send_data @location_list.to_csv }
-      end
-    end
-
-    def show
-      respond_to do |format|
-        format.html { render :show }
-        format.pdf do
-          pdf = Prawn::Document.new
-          pdf.table([ [pcode = instance.code], [pbuilding = instance.building] ])
-          send_data pdf.render,
-            filename: "export.pdf",
-            type: 'application/pdf',
-            disposition: 'inline'
-        end
-      end
-    end
-
-    def create
-      location_code = instance.aisle+("%03d" % instance.column)+instance.layer.to_s+'R'+instance.room+'B'+instance.building
-      #flash[:message] = location_code
-      #redirect_to LocationsAdmin.path
-      if Location.exists?(code: location_code)
-        flash.now[:error] = flash_message("location exists", title: "Warning!", message: location_code + I18n.t(:error_record_exists) )
-        render "new" , status: :unprocessable_entity
-      else
-        if save_instance
-          respond_to do |format|
-            format.html do
-              flash[:message] = flash_message("create.success", title: "Success!", message: "The %{lowercase_model_name} was successfully created.")
-              redirect_to_return_location(:create, instance, default: admin.instance_path(instance))
-            end
-            format.json { render json: instance, status: :created, location: admin.instance_path(instance) }
-
-            yield format if block_given?
-          end
-        end
-
-      end
-    end
-  end
   # Customize the table columns shown on the index view.
   #
   # table do
@@ -111,7 +60,7 @@ Trestle.resource(:locations, readonly: true) do
 
   # Customize the form fields shown on the new/edit views.
   #
-  # form do |location|
+  # form do |physical_loc|
   #   text_field :name
   #
   #   row do
@@ -128,6 +77,6 @@ Trestle.resource(:locations, readonly: true) do
   #   http://guides.rubyonrails.org/action_controller_overview.html#strong-parameters
   #
   # params do |params|
-  #   params.require(:location).permit(:name, ...)
+  #   params.require(:physical_loc).permit(:name, ...)
   # end
 end

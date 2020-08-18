@@ -1,0 +1,2 @@
+class PhysicalLoc < Location
+end
