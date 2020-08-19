@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_14_094517) do
+ActiveRecord::Schema.define(version: 2020_08_19_061820) do
 
   create_table "book_order_details", force: :cascade do |t|
     t.integer "book_order_id", null: false
@@ -44,6 +44,8 @@ ActiveRecord::Schema.define(version: 2020_08_14_094517) do
     t.text "notes"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "assignee_id"
+    t.index ["assignee_id"], name: "index_book_orders_on_assignee_id"
   end
 
   create_table "books", force: :cascade do |t|
@@ -64,6 +66,7 @@ ActiveRecord::Schema.define(version: 2020_08_14_094517) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "group"
+    t.string "name"
     t.index ["email"], name: "index_dusers_on_email", unique: true
     t.index ["reset_password_token"], name: "index_dusers_on_reset_password_token", unique: true
   end
@@ -125,5 +128,6 @@ ActiveRecord::Schema.define(version: 2020_08_14_094517) do
   add_foreign_key "book_order_details", "books"
   add_foreign_key "book_order_lines", "book_orders"
   add_foreign_key "book_order_lines", "books"
+  add_foreign_key "book_orders", "dusers", column: "assignee_id"
   add_foreign_key "order_details", "book_orders"
 end

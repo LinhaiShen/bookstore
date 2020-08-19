@@ -17,6 +17,8 @@ Trestle.resource(:book_orders) do
     scope :all
     scope :open , default: true
     scope :today
+    scope :assigned
+    scope :unassigned
   end
 
   form do
@@ -25,6 +27,7 @@ Trestle.resource(:book_orders) do
         text_field :id,:readonly => true
         text_field :refnumber
         select :status, BookOrder::STATUSES
+        select :assignee_id, Duser.all
       end
       text_field :deliveryaddress
       text_field :notes

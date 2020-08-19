@@ -18,6 +18,7 @@ Trestle.resource(:dusers, model: Duser, scope: Auth) do
       avatar_for(administrator)
     end
     column :email, link: true
+    column :name
     actions do |a|
       a.delete unless a.instance == current_user
     end
@@ -25,6 +26,7 @@ Trestle.resource(:dusers, model: Duser, scope: Auth) do
 
   form do |duser|
     text_field :email
+    text_field :name
     #select :group, ["sysadmin","orderadmin","worker"]
     select :role_ids, Role.alphabetical.map { |c|[c.name, c.id] }, { label: "Role" }, multiple: true
 
