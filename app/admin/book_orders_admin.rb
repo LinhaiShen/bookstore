@@ -27,7 +27,7 @@ Trestle.resource(:book_orders) do
         text_field :id,:readonly => true
         text_field :refnumber
         select :status, BookOrder::STATUSES
-        select :assignee_id, Duser.all
+       select :assignee_id, Duser.all, include_blank: true
       end
       text_field :deliveryaddress
       text_field :notes

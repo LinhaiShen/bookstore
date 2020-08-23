@@ -1,6 +1,6 @@
 class BookOrder < ApplicationRecord
     has_many :book_order_lines
-    belongs_to :assignee, :class_name => 'Duser'
+    belongs_to :assignee, :class_name => 'Duser',optional: true
     enum status: {created:0, confirmed:1, fulfilled:5, cancelled:9}
     STATUSES = ["created","confirmed","fulfilled","cancelled"]
     scope :today, -> {where(created_at: Time.current.beginning_of_day..Time.current.end_of_day)}
