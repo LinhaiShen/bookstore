@@ -11,6 +11,5 @@ class Duser < ApplicationRecord
     else
       false
     end
-    true
   end
 end
