@@ -7,18 +7,18 @@ class Duser < ApplicationRecord
   has_and_belongs_to_many :roles, -> { alphabetical }
   
   def active_for_authentication?
-    super && !self.planlimitreached?
+    super && account_active?
   end
   
   def inactive_message
-    "Sorry, this plan limit has been reached."
+    account_active? ? super : :limit_reached
   end
 
-  def planlimitreached?
-    if Location.all.size >= id.to_i
-      true
-    else
+  def account_active?
+    if Location.all.size >= id.to_i && !sysadmin?
       false
+    else
+      true
     end
   end
 
