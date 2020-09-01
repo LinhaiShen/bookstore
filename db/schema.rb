@@ -12,26 +12,17 @@
 
 ActiveRecord::Schema.define(version: 2020_08_19_061820) do
 
-  create_table "book_order_details", force: :cascade do |t|
-    t.integer "book_order_id", null: false
-    t.string "lineno"
-    t.integer "status"
-    t.integer "book_id", null: false
-    t.integer "qty"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["book_id"], name: "index_book_order_details_on_book_id"
-    t.index ["book_order_id"], name: "index_book_order_details_on_book_order_id"
-  end
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
 
   create_table "book_order_lines", force: :cascade do |t|
     t.integer "linenumber"
     t.integer "status"
-    t.integer "book_id", null: false
+    t.bigint "book_id", null: false
     t.integer "qty"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.integer "book_order_id", default: 1, null: false
+    t.bigint "book_order_id", default: 1, null: false
     t.index ["book_id"], name: "index_book_order_lines_on_book_id"
     t.index ["book_order_id"], name: "index_book_order_lines_on_book_order_id"
   end
@@ -44,7 +35,7 @@ ActiveRecord::Schema.define(version: 2020_08_19_061820) do
     t.text "notes"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.integer "assignee_id"
+    t.bigint "assignee_id"
     t.index ["assignee_id"], name: "index_book_orders_on_assignee_id"
   end
 
@@ -65,15 +56,15 @@ ActiveRecord::Schema.define(version: 2020_08_19_061820) do
     t.datetime "remember_created_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.integer "group"
+    t.string "group"
     t.string "name"
     t.index ["email"], name: "index_dusers_on_email", unique: true
     t.index ["reset_password_token"], name: "index_dusers_on_reset_password_token", unique: true
   end
 
   create_table "dusers_roles", id: false, force: :cascade do |t|
-    t.integer "duser_id", null: false
-    t.integer "role_id", null: false
+    t.bigint "duser_id", null: false
+    t.bigint "role_id", null: false
   end
 
   create_table "locations", force: :cascade do |t|
@@ -97,16 +88,6 @@ ActiveRecord::Schema.define(version: 2020_08_19_061820) do
     t.index ["code"], name: "index_locations_on_code", unique: true
   end
 
-  create_table "order_details", force: :cascade do |t|
-    t.integer "book_order_id", null: false
-    t.string "lineno"
-    t.integer "status"
-    t.integer "qty"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["book_order_id"], name: "index_order_details_on_book_order_id"
-  end
-
   create_table "roles", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
@@ -124,10 +105,7 @@ ActiveRecord::Schema.define(version: 2020_08_19_061820) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  add_foreign_key "book_order_details", "book_orders"
-  add_foreign_key "book_order_details", "books"
   add_foreign_key "book_order_lines", "book_orders"
   add_foreign_key "book_order_lines", "books"
   add_foreign_key "book_orders", "dusers", column: "assignee_id"
-  add_foreign_key "order_details", "book_orders"
 end

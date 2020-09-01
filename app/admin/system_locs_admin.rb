@@ -18,8 +18,8 @@ Trestle.resource(:system_locs) do
   form do |location|
     tab :Location do
       row do
-        col(sm: 2) { static_field :code }
-        col(sm: 1) { text_field :ops }
+        col(sm: 2) { text_field :code }
+        col(sm: 1) { text_field :ops, :value => "sysloc", :readonly => true }
         col(sm: 1) { select :loctype,Location::LOCTYPES }
         col(sm: 1) { text_field :container }
       end
@@ -29,7 +29,7 @@ Trestle.resource(:system_locs) do
         col(sm: 1) { select :room, Location::ROOMS }
         col(sm: 1) { select :aisle, Location::AISLES }
         col(sm: 1) { select :face, Location::FACES }
-        col(sm: 1) { text_field :column, required: true }
+        col(sm: 1) { text_field :column, :value => 1 }
         col(sm: 1) { select :layer, Location::LAYERS }
       end
       #text_field :building
