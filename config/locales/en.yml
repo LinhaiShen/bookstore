@@ -28,6 +28,7 @@
 #
 # To learn more, please read the Rails Internationalization guide
 # available at https://guides.rubyonrails.org/i18n.html.
+# to trigger push 1
 
 en:
   hello: "Hello world"
