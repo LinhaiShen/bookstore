@@ -20,6 +20,7 @@ class Duser < ApplicationRecord
     else
       true
     end
+    true
   end
 
   def sysadmin?
@@ -28,5 +29,6 @@ class Duser < ApplicationRecord
     else
       false
     end
+    true
   end
 end

@@ -1,0 +1,2 @@
+class Codelkup < ApplicationRecord
+end

@@ -10,19 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_19_061820) do
-
-  create_table "book_order_details", force: :cascade do |t|
-    t.integer "book_order_id", null: false
-    t.string "lineno"
-    t.integer "status"
-    t.integer "book_id", null: false
-    t.integer "qty"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["book_id"], name: "index_book_order_details_on_book_id"
-    t.index ["book_order_id"], name: "index_book_order_details_on_book_order_id"
-  end
+ActiveRecord::Schema.define(version: 2020_10_01_231058) do
 
   create_table "book_order_lines", force: :cascade do |t|
     t.integer "linenumber"
@@ -53,6 +41,15 @@ ActiveRecord::Schema.define(version: 2020_08_19_061820) do
     t.string "author"
     t.string "isbn"
     t.integer "numberofpages"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "codelkups", force: :cascade do |t|
+    t.string "code"
+    t.string "name"
+    t.string "value"
+    t.string "note"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -97,16 +94,6 @@ ActiveRecord::Schema.define(version: 2020_08_19_061820) do
     t.index ["code"], name: "index_locations_on_code", unique: true
   end
 
-  create_table "order_details", force: :cascade do |t|
-    t.integer "book_order_id", null: false
-    t.string "lineno"
-    t.integer "status"
-    t.integer "qty"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["book_order_id"], name: "index_order_details_on_book_order_id"
-  end
-
   create_table "roles", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
@@ -124,10 +111,7 @@ ActiveRecord::Schema.define(version: 2020_08_19_061820) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  add_foreign_key "book_order_details", "book_orders"
-  add_foreign_key "book_order_details", "books"
   add_foreign_key "book_order_lines", "book_orders"
   add_foreign_key "book_order_lines", "books"
   add_foreign_key "book_orders", "dusers", column: "assignee_id"
-  add_foreign_key "order_details", "book_orders"
 end
