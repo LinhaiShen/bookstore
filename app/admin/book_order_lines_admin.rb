@@ -5,7 +5,7 @@ Trestle.resource(:book_order_lines) do
     end
   end
 
-  form do
+  form dialog: true do
     select :book_order_id, BookOrder.all
     text_field :linenumber
     select :book_id, Book.all
