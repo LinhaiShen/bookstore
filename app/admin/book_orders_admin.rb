@@ -40,6 +40,7 @@ Trestle.resource(:book_orders) do
         column :book
         column :qty
       end
+      concat admin_link_to("New Line", admin: :book_order_lines, action: :new, params: { book_order_id: instance.id }, class: "btn btn-success")
     end
   end
 
