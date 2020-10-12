@@ -28,6 +28,7 @@ Trestle.resource(:dusers, model: Duser, scope: Auth) do
     text_field :email
     text_field :name
     #select :group, ["sysadmin","orderadmin","worker"]
+    tag_select :privilege_list
     select :role_ids, Role.alphabetical.map { |c|[c.name, c.id] }, { label: "Role" }, multiple: true
 
     row do

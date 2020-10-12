@@ -5,6 +5,8 @@ class Duser < ApplicationRecord
          :recoverable, :rememberable, :validatable
   enum group: {sysadmin:0, orderadmin:1, worker:2}
   has_and_belongs_to_many :roles, -> { alphabetical }
+
+  acts_as_taggable_on :privileges
   
   def active_for_authentication?
     super && account_active?
