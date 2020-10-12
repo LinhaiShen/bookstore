@@ -19,6 +19,10 @@ Trestle.resource(:book_orders) do
     scope :today
     scope :assigned
     scope :unassigned
+      
+    BookOrder.statuses.to_a.each do |stat|
+        scope stat[0], -> { BookOrder.where(status: stat[0]) }
+    end
   end
 
   form do
