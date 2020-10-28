@@ -61,6 +61,9 @@ Trestle.resource(:book_orders) do
           pdf = Prawn::Document.new
           pdf.font("vendor/assets/fonts/msyhl.ttc")
           pdf.table(data_array, header: true)
+          pdf.bounding_box([pdf.bounds.left, pdf.bounds.bottom], :width => pdf.bounds.width, :height => 30) {
+          pdf.number_pages "<page> of <total>"
+          }
           send_data pdf.render,
             filename: "export.pdf",
             type: 'application/pdf',
