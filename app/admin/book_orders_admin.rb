@@ -45,9 +45,28 @@ Trestle.resource(:book_orders) do
         column :qty
       end
       concat admin_link_to("New Line", admin: :book_order_lines, action: :new, params: { book_order_id: instance.id }, class: "btn btn-success")
+    end
+  end
 
-      
-
+  controller do
+    def show
+      respond_to do |format|
+        format.html { render :show }
+        format.pdf do
+          data_array ||= []
+          data_array << ["linenumber","status","book","qty"]
+          instance.book_order_lines.each do |line|
+            data_array << [line.linenumber, line.status, line.book.name, line.qty]
+          end
+          pdf = Prawn::Document.new
+          pdf.font("vendor/assets/fonts/msyhl.ttc")
+          pdf.table(data_array, header: true)
+          send_data pdf.render,
+            filename: "export.pdf",
+            type: 'application/pdf',
+            disposition: 'inline'
+        end
+      end
     end
   end
 
