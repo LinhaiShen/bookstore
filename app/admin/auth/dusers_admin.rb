@@ -14,7 +14,10 @@ Trestle.resource(:dusers, model: Duser, scope: Auth) do
   end
 
   scopes do
-    scope :sysadmin
+    #scope :sysadmin
+    Duser.tag_counts_on(:privileges).each do |p|
+      scope p.name, -> { Duser.tagged_with(p.name, on: :privileges) }
+  end
   end
 
   table do

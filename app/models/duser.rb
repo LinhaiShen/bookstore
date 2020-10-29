@@ -8,7 +8,7 @@ class Duser < ApplicationRecord
 
   acts_as_taggable_on :privileges
 
-  scope :sysadmin, -> {tagged_with("Sysadmin")}
+  scope :sysadmin, -> {tagged_with("Sysadmin", on: :privileges)}
   
   def active_for_authentication?
     super && account_active?
