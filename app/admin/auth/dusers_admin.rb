@@ -13,6 +13,10 @@ Trestle.resource(:dusers, model: Duser, scope: Auth) do
   end
   end
 
+  scopes do
+    scope :sysadmin
+  end
+
   table do
     column :avatar, header: false do |administrator|
       avatar_for(administrator)
