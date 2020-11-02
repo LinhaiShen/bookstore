@@ -34,7 +34,7 @@ Trestle.resource(:book_orders) do
     column :notes
     column :assignee
     actions do |toolbar, instance, admin|
-      link_to('Order PDF', admin.path(:show, id: instance.id, format: :pdf), method: :get, class: "btn btn-info btn-block")
+      toolbar.link 'Order PDF', admin.path(:show, id: instance.id, format: :pdf), method: :get, style: :primary, icon: "fa fa-truck-loading"
     end
   end
 
